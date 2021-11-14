@@ -5,7 +5,7 @@ import random
 
 class Game():
     def __init__(self):
-#        self.board = self.createBoard()
+        self.board = self.createBoard()
         self.victor = None
 
 # establishing the board and the victor.
@@ -19,10 +19,10 @@ class Game():
                 print('| '+' | '.join(row)+' |')        # joining strings to print complete rows.
 
 
-    def boardPlaces():
-        places = [[str(i) for i in range(a * 3, (a + 1)*3)]for a in range(3)]       # assigning numbers to the board places for clarity.
+    def boardPlaces(self):
+        places = [[str(i) for i in range(a * 3, (a + 1)*3)]for a in range(3)]       # assigning numbers to the board places.
         for row in places:
-            print('| '+' | '.join(row)+' |')
+            print('| '+' | '.join(row)+' |')                            # the program displays the 3x3 board in rows
 
     def playerMoves(self,square,letter):        # making the player choose a space and letter 
         if self.theBoard[square] == ' ':
@@ -59,15 +59,15 @@ class Game():
             return False
                                                     # loss, if not
     def spaces(self):
-        return ' ' in self.theBoard
+        return ' ' in self.board
     def emptySpace(self):
-        return self.theBoard.count(' ')
+        return ' ' in self.board
     def spacesLeft(self):
         return [i for i, x in enumerate(self.board) if x == ' ']
     def availableMoves(self):
         return [i for i, x in enumerate(self.board) if x == " "]
 
-def current(game,x,o, printGame = True):     # establishing 
+def current(game,x,o, printGame = True):     # establishing the game, and setting the players
         if printGame:
             game.boardPlaces()
         letter = 'x'
@@ -82,13 +82,11 @@ def current(game,x,o, printGame = True):     # establishing
                 game.print_board()
                 print('')
 
-            if game.current_winner:
+            if game.victor:
                 if printGame:
                     print(letter + ' wins!')
-                return letter  # ends the loop and exits the game
-            letter = 'o' if letter == 'x' else 'x'  # switches player
-
-    #    time.sleep(.8)
+                return letter                               # exits game
+            letter = 'o' if letter == 'x' else 'x'          # changes the player
 
         if printGame:
             print('It\'s a tie!')
