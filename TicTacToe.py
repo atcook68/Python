@@ -1,49 +1,46 @@
-# establishing the board. A dictionary with empty values attatched to the 9 keys. 
+import math
+
+# establishing the board and the victor. 
+def __init__(self):
+    self.board = self.printBoard()
+    self.victor = None
+
+def theBoard():     #   creating a board with 9 total places to fill.
+        return [' ' for _ in range(9)]
 
 
+def printBoard(self):                        # the function to print the board. 
+    for row in [self.theBoard[i * 3:
+        (i + 1) * 3]
+        for i in range(3)]:
+            print('| '+' | '.join(row)+' |')        # joining strings to print complete rows.
 
 
-theBoard = [        # Creating the board for the player and computer
-        ["-","-","-"],
-        ["-","-","-"],
-        ["-","-","-"]
-]
-def printBoard(theBoard):       # the function to print the board. 
-    for row in theBoard:
-        for place in row:
-            print(f"{place} ", end="")       # an f string to print the variable and not the string.
-        print()
-printBoard(theBoard)
-def exit(input):                # quit function
-    if input.lower == "q":      # changing all user input to lowercase in case the user enters a capital letter
+def boardPlaces():
+    places = [[str(i) for i in range(a * 3, (a + 1)*3)]for a in range(3)]       # assigning numbers to the places for clarity.
+    for row in places:
+        print('| '+' | '.join(row)+' |')
+
+def playerMoves(self,square,letter):        # making the player choose a space and letter 
+    if self.theBoard[square] == ' ':
+        self.theBoard[square] == letter
+        if self.won(square,letter):
+            self.victor = letter
         return True
-    else: 
-        return False
-while True:
-    choices = input("Make a move, 1(bottom left) to 9(top right) or \"q\" to quit: ")
-    if exit:
-        print("Exiting game")
-        break
-    
+    return False
+
+#   Are the moves ending the game? this function checks
+def checkWin(self, square, letter):     # checking the the rows for same letter
+    rowcheck = math.floor(square/3)
+    row = self.theBoard[rowcheck * 3: (rowcheck + 1) * 3]
+
+    if all([s == letter for s in row]):            # if player has occupied all of the places in the row, they are the victor.
+        return True
+
+    columnCheck = square % 3
+    column = [self.theBoard[columnCheck + i * 3] for i in range()]
 
 
-
-
-
-
-
-
-
-
-
-
-
-'''
-board_keys=[]
-for key in theBoard:
-    board_keys.append(key)
-player, opponent = 'X','O'
-'''
 
 
 
@@ -54,44 +51,3 @@ player, opponent = 'X','O'
 # else - add it to the board
 # check rows, columns, and diagonals if user has won. 
 
-
-
-'''
-def game():
-    turn = 'X'
-    count = 0
-    for i in range(10):     # beginning the for loop 
-        printBoard(theBoard)
-        print("It is now "+ turn + "'s turn, where do you move?")
-        move = input()                  # ask the user for input
-        if theBoard[move] == ' ':       # if the user inputs a key for a value that is empty
-            theBoard[move] = turn       # fill the block
-            count = count + 1           # iterate the count by 1
-        else:                           # any other user input
-            print("That spot is taken.\n Choose another space")         # tell the user the choice is invalid and to choose another. 
-            continue
-        
-
-        # If neither X nor O wins and the board is full, we'll declare the result as 'tie'.
-        if count == 9:
-            print("\nGame Over.\n")                
-            print("It's a Tie!!")
-
-        # we have to change the player after every move.
-    def next_player(turn):
-        if turn == 'X':
-            turn = 'O'
-        if turn == 'O':
-            turn = 'X'
-        return turn
-
-    restart = input("Play again? (y for yes/n for no)")
-    if restart == "y":
-        for key in board_keys:
-            theBoard[key] = " "
-
-        game()
-if __name__=="__main__":
-    game()
-
-'''    
