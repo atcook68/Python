@@ -2,21 +2,20 @@ from players import AI, User
 import math
 import random
 
-
 class Game():
     def __init__(self):
-        self.board = self.createBoard()
+        self.board = self.createBoard
         self.victor = None
 
 # establishing the board and the victor.
     def createBoard():     #   creating a board with 9 total places to fill.
-        return [' ' for _ in range(9)]
+        return [' ',' ',' ',' ',' ',' ',' ',' ',' ',]   #for square in range(9)]
 
     def printBoard(self):                        # the function to print the board. 
         for row in [self.theBoard[i * 3:
             (i + 1) * 3]
             for i in range(3)]:
-                print('| '+' | '.join(row)+' |')        # joining strings to print complete rows.
+                print(' '+' | '.join(row)+' ')        # concatenating the pipe strings to make the columns of the board.
 
 
     def boardPlaces(self):
@@ -58,12 +57,12 @@ class Game():
                     return True                                     # victory
             return False
                                                     # loss, if not
-    def spaces(self):
-        return ' ' in self.board
     def emptySpace(self):
         return ' ' in self.board
     def spacesLeft(self):
-        return [i for i, x in enumerate(self.board) if x == ' ']
+        return ' ' in self.board.count(' ')
+  #  def spacesLeft(self):
+  #      return [i for i, x in enumerate(self.board) if x == ' ']
     def availableMoves(self):
         return [i for i, x in enumerate(self.board) if x == " "]
 
@@ -84,16 +83,18 @@ def current(game,x,o, printGame = True):     # establishing the game, and settin
 
             if game.victor:
                 if printGame:
-                    print(letter + ' wins!')
+                    print(letter + ' wins')
+                    tictactoe = 'tictactoe.txt'         
+                    with open(tictactoe) as file_object:            # open the tictactoe text file.
+                        file_object.write(letter + ' victory\n')    # record the win, whosever it is, to the file.
                 return letter                               # exits game
             letter = 'o' if letter == 'x' else 'x'          # changes the player
-
         if printGame:
-            print('It\'s a tie!')
+            print('No winner, tie game')
 
 if __name__ == '__main__':
-    x = AI('X')
-    o = User('O')
+    x = AI('o')
+    o = User('x')
     t = Game()
     current(t, x, o, printGame = True)
 
